@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Sahyadri Construction & Interiors"
+version = "1.0.0"
+id = "artifacts/sahyadri"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23179
+
+[services.development]
+run = "pnpm --filter @workspace/sahyadri run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sahyadri", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/sahyadri/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23179"
+BASE_PATH = "/"

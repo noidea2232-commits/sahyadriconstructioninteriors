@@ -1,0 +1,701 @@
+# ROLE
+
+You are an award-winning UI/UX Designer, Creative Director, GSAP Animation Specialist, Senior Full Stack Developer, Motion Designer, SEO Expert, and Frontend Architect.
+
+Your goal is to build an Awwwards-quality premium website for a luxury construction and interior company.
+
+The website should deliver a cinematic, modern, immersive experience inspired by premium creative agency websites. It should capture the same level of polish, smoothness, and interaction quality as the reference while using completely original code, layouts, graphics, and content.
+
+Do NOT generate a generic construction website.
+
+Think Apple.com × Awwwards × Luxury Architecture Studio.
+
+Every pixel should feel premium.
+
+----------------------------------------------------
+
+COMPANY INFORMATION
+
+Company Name
+
+Sahyadri Construction & Interiors
+
+Logo
+
+Use the uploaded Sahyadri logo throughout the website.
+
+Use it for:
+
+Navigation
+
+Loader
+
+Footer
+
+Favicon
+
+Contact section
+
+Company Information
+
+⭐ 4.99 Google Rating
+
+Construction Company
+
+Interior Design Company
+
+Residential Construction
+
+Commercial Construction
+
+Renovation
+
+Turnkey Projects
+
+Address
+
+Vismaya Complex
+
+Good Luck Circle
+
+Lagan Mandir Road
+
+Gadikoppa
+
+Shivamogga
+
+Karnataka
+
+577205
+
+Phone
+
++91 8660017139
+
+----------------------------------------------------
+
+REFERENCE
+
+The visual quality, premium feeling, scrolling smoothness, animation quality, and interaction design should be inspired by:
+
+https://www.keycorners.com/
+
+Do NOT copy their images, videos, text, branding, or exact layouts.
+
+Instead, create an original premium experience with a similar level of craftsmanship and motion quality.
+
+----------------------------------------------------
+
+OBJECTIVE
+
+Visitors should immediately feel trust, luxury, professionalism, and attention to detail.
+
+Every section should have purposeful motion and premium transitions.
+
+Avoid template-like design.
+
+----------------------------------------------------
+
+TECH STACK
+
+Next.js 15
+
+React 19
+
+TypeScript
+
+TailwindCSS
+
+GSAP
+
+GSAP ScrollTrigger
+
+Lenis Smooth Scroll
+
+Framer Motion
+
+SwiperJS
+
+React Icons
+
+React CountUp
+
+Lottie React
+
+React Hook Form
+
+Next SEO
+
+Next Image
+
+----------------------------------------------------
+
+COLOR PALETTE
+
+Background
+
+#080808
+
+Secondary
+
+#111111
+
+Primary Gold
+
+#C8A96A
+
+White
+
+#FFFFFF
+
+Grey
+
+#A0A0A0
+
+Use glassmorphism
+
+Luxury shadows
+
+Noise textures
+
+Soft gradients
+
+Premium lighting
+
+----------------------------------------------------
+
+TYPOGRAPHY
+
+Montserrat ExtraBold
+
+Inter
+
+Large elegant spacing
+
+Massive hero typography
+
+Premium hierarchy
+
+Minimal
+
+----------------------------------------------------
+
+WEBSITE STRUCTURE
+
+01 Loader
+
+02 Navigation
+
+03 Hero
+
+04 About
+
+05 Services
+
+06 Featured Projects
+
+07 Why Choose Us
+
+08 Construction Process
+
+09 Statistics
+
+10 Testimonials
+
+11 FAQ
+
+12 Contact
+
+13 Footer
+
+----------------------------------------------------
+
+LOADER
+
+Animated logo reveal
+
+Luxury fade
+
+Gold light sweep
+
+Background blur
+
+Smooth exit transition
+
+----------------------------------------------------
+
+NAVBAR
+
+Transparent initially
+
+Glassmorphism
+
+Blur
+
+Sticky
+
+Shrink on scroll
+
+Gold border appears
+
+Animated underline
+
+Mobile menu
+
+Hamburger animation
+
+Hover glow
+
+----------------------------------------------------
+
+HERO
+
+Full viewport
+
+Luxury construction background
+
+Dark cinematic overlay
+
+Gold accents
+
+Floating particles
+
+Soft parallax
+
+Large heading
+
+Subheading
+
+Primary CTA
+
+Secondary CTA
+
+Mouse scroll indicator
+
+Animated background zoom
+
+Split text animation
+
+Buttons stagger
+
+----------------------------------------------------
+
+ABOUT
+
+Split layout
+
+Large premium imagery
+
+Mission
+
+Vision
+
+Experience
+
+Company overview
+
+Animated counters
+
+Years
+
+Projects
+
+Happy Clients
+
+Luxury typography
+
+Reveal animations
+
+----------------------------------------------------
+
+SERVICES
+
+Luxury service cards
+
+Residential
+
+Commercial
+
+Interiors
+
+Renovation
+
+Architecture
+
+Planning
+
+Each card should include
+
+Luxury hover
+
+Image zoom
+
+Glow border
+
+Gradient animation
+
+Button animation
+
+----------------------------------------------------
+
+FEATURED PROJECTS
+
+Premium grid
+
+Large images
+
+Hover overlays
+
+Project categories
+
+Lightbox
+
+Project details
+
+Image reveal animation
+
+Parallax movement
+
+----------------------------------------------------
+
+WHY CHOOSE US
+
+Premium icon cards
+
+Certified Team
+
+Transparent Pricing
+
+Modern Designs
+
+Quality Materials
+
+Timely Delivery
+
+Customer Satisfaction
+
+Animated icons
+
+Luxury cards
+
+----------------------------------------------------
+
+PROCESS
+
+Timeline
+
+Consultation
+
+Planning
+
+Design
+
+Construction
+
+Interior
+
+Delivery
+
+Scroll-driven timeline animation
+
+Lines draw while scrolling
+
+Cards appear sequentially
+
+----------------------------------------------------
+
+STATISTICS
+
+Animated counters
+
+Projects
+
+Experience
+
+Clients
+
+Google Rating
+
+CountUp animation
+
+----------------------------------------------------
+
+TESTIMONIALS
+
+Luxury cards
+
+Glass effect
+
+5-star reviews
+
+Auto carousel
+
+Smooth fade
+
+Infinite scrolling
+
+----------------------------------------------------
+
+FAQ
+
+Accordion
+
+Smooth open
+
+Rotate icon
+
+Minimal premium design
+
+----------------------------------------------------
+
+CONTACT
+
+Premium contact form
+
+Business details
+
+Phone
+
+Address
+
+Google rating
+
+Map section
+
+Floating WhatsApp button
+
+Floating Call button
+
+----------------------------------------------------
+
+FOOTER
+
+Large logo
+
+Quick links
+
+Services
+
+Contact information
+
+Social media placeholders
+
+Luxury dark background
+
+----------------------------------------------------
+
+ANIMATION REQUIREMENTS
+
+Everything should animate naturally.
+
+Use GSAP ScrollTrigger extensively.
+
+Include
+
+Smooth fade
+
+Slide up
+
+Slide left
+
+Slide right
+
+Zoom
+
+Scale
+
+Mask reveal
+
+Image reveal
+
+Split text
+
+Word stagger
+
+Character stagger
+
+Parallax
+
+Pinned sections where appropriate
+
+Floating objects
+
+Hover animations
+
+Button ripple
+
+Magnetic buttons
+
+Luxury cursor
+
+Scroll progress bar
+
+Soft page transitions
+
+Section reveal
+
+Background movement
+
+Glow animations
+
+Micro interactions
+
+----------------------------------------------------
+
+SCROLL EXPERIENCE
+
+Implement Lenis Smooth Scroll.
+
+Scrolling must feel buttery smooth.
+
+Every section should reveal beautifully.
+
+Different animation timing for each section.
+
+No repetitive animations.
+
+----------------------------------------------------
+
+MICRO INTERACTIONS
+
+Buttons scale
+
+Icons rotate
+
+Cards lift
+
+Shadows animate
+
+Images zoom
+
+Cursor changes
+
+Text underline animations
+
+Gradient movements
+
+----------------------------------------------------
+
+RESPONSIVE
+
+Desktop
+
+Laptop
+
+Tablet
+
+Mobile
+
+Large monitors
+
+Ultra-wide displays
+
+----------------------------------------------------
+
+SEO
+
+Proper semantic HTML
+
+Metadata
+
+Open Graph
+
+Twitter Cards
+
+Local Business Schema
+
+Organization Schema
+
+Optimized images
+
+Sitemap
+
+Robots
+
+----------------------------------------------------
+
+PERFORMANCE
+
+Lazy loading
+
+Code splitting
+
+Reusable components
+
+Image optimization
+
+Dynamic imports
+
+Accessibility
+
+Lighthouse score above 95
+
+----------------------------------------------------
+
+FOLDER STRUCTURE
+
+/components
+
+/sections
+
+/hooks
+
+/lib
+
+/styles
+
+/public
+
+----------------------------------------------------
+
+CODING STANDARDS
+
+Senior-level architecture
+
+Reusable components
+
+Clean TypeScript
+
+Modular animations
+
+Maintainable folder structure
+
+No duplicated code
+
+Production-ready
+
+----------------------------------------------------
+
+PLACEHOLDER CONTENT
+
+Until real content is provided:
+
+Use premium royalty-free construction/interior placeholder images.
+
+Generate realistic construction project titles.
+
+Use professional placeholder testimonials.
+
+Create premium placeholder project descriptions.
+
+Keep all content easy to replace later.
+
+----------------------------------------------------
+
+FINAL GOAL
+
+Build a website that feels like it was designed by a top international creative agency.
+
+The visitor should experience luxury, trust, elegance, and premium craftsmanship from the first second.
+
+Every animation should feel intentional.
+
+Every section should feel alive.
+
+Every interaction should feel handcrafted.
+
+Do not rush any section.
+
+Prioritize quality over quantity.
+
+Deliver production-ready code with pixel-perfect responsiveness, cinematic animations, and maintainable architecture.
