@@ -15,6 +15,7 @@ const links = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,21 @@ export function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('loader-played')) {
+      setShouldAnimate(true);
+      return () => {};
+    } else {
+      const handleStart = () => {
+        setShouldAnimate(true);
+      };
+      document.addEventListener('start-hero-animation', handleStart);
+      return () => {
+        document.removeEventListener('start-hero-animation', handleStart);
+      };
+    }
   }, []);
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -39,22 +55,22 @@ export function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 2.5 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={shouldAnimate ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 md:px-12 ${
           isScrolled 
-            ? 'py-4 bg-[#080808]/80 backdrop-blur-xl border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
+            ? 'py-4 bg-background/95 backdrop-blur-xl border-b border-primary/20 shadow-[0_4px_30px_rgba(184,146,74,0.05)]' 
             : 'py-6 md:py-8 bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#home" onClick={(e) => scrollTo(e, '#home')} className="flex items-center gap-3 group">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-white/10 group-hover:border-primary/50 transition-colors duration-300">
+            <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 group-hover:border-primary transition-colors duration-300">
               <img src={logo} alt="Sahyadri Logo" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-lg md:text-xl tracking-wide text-white group-hover:text-primary transition-colors duration-300 leading-tight">SAHYADRI</span>
+              <span className="font-display font-bold text-lg md:text-xl tracking-wide text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">SAHYADRI</span>
               <span className="text-[10px] md:text-xs text-muted-foreground tracking-widest uppercase hidden md:block">Construction & Interiors</span>
             </div>
           </a>
@@ -66,16 +82,16 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollTo(e, link.href)}
-                className="text-sm font-medium text-white/80 hover:text-white uppercase tracking-wider relative group"
+                className="text-sm font-medium text-foreground hover:text-primary uppercase tracking-tight relative group"
               >
                 {link.name}
-                <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <a 
               href="#contact" 
               onClick={(e) => scrollTo(e, '#contact')}
-              className="px-6 py-2.5 border border-primary text-primary font-medium text-sm tracking-widest uppercase hover:bg-primary hover:text-background transition-colors duration-300"
+              className="px-6 py-2.5 bg-primary text-primary-foreground font-medium text-sm tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors duration-300"
             >
               Get in Touch
             </a>
@@ -83,7 +99,7 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-white hover:text-primary transition-colors"
+            className="md:hidden text-foreground hover:text-primary transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -96,13 +112,13 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-[#080808]/95 flex flex-col justify-center items-center md:hidden"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-40 bg-background flex flex-col justify-center items-center md:hidden border-l border-primary/20 shadow-2xl"
           >
-            <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-8 w-full px-6">
               {links.map((link, i) => (
                 <motion.a
                   key={link.name}
@@ -110,8 +126,8 @@ export function Navbar() {
                   onClick={(e) => scrollTo(e, link.href)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.4 }}
-                  className="font-display text-2xl font-bold tracking-widest text-white hover:text-primary uppercase"
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
+                  className="font-display text-2xl font-bold tracking-widest text-foreground hover:text-primary uppercase w-full text-center py-2 border-b border-border"
                 >
                   {link.name}
                 </motion.a>
@@ -121,8 +137,8 @@ export function Navbar() {
                 onClick={(e) => scrollTo(e, '#contact')}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: links.length * 0.1, duration: 0.4 }}
-                className="mt-4 px-8 py-3 border border-primary text-primary font-medium text-sm tracking-widest uppercase"
+                transition={{ delay: 0.2 + links.length * 0.1, duration: 0.4 }}
+                className="mt-8 w-full text-center px-8 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-widest uppercase"
               >
                 Get in Touch
               </motion.a>
