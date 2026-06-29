@@ -1,0 +1,7 @@
+node_modules
+.git
+.local
+.cache
+.agents
+**/node_modules
+WhatsApp-Video-2026-06-26-at-401

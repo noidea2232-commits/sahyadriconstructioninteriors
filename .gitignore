@@ -50,3 +50,5 @@ Thumbs.db
 
 # Duplicate frame sequence at repo root (served from artifacts/sahyadri/public)
 /WhatsApp-Video-2026-06-26-at-401/
+
+.vercel
