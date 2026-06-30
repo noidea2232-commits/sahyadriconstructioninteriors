@@ -5,6 +5,7 @@ import CountUp from 'react-countup';
 import { ShieldCheck, Award, Building, UserCheck, Phone, MessageCircle } from 'lucide-react';
 import aboutImg from '@assets/about-img.png';
 import { COMPANY_STATS } from '@/lib/company-stats';
+import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -295,7 +296,10 @@ export function About() {
                       <span>Call Now</span>
                     </a>
                     <a 
-                      href={`https://wa.me/${founder.whatsapp}`}
+                      href={buildWhatsAppUrl(
+                        whatsappMessages.founder(founder.name, founder.role),
+                        founder.whatsapp,
+                      )}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all duration-300 shadow-md"

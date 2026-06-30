@@ -1,4 +1,5 @@
 import { MessageCircle, Phone, Instagram } from 'lucide-react';
+import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
 
 export function FloatingButtons() {
   return (
@@ -19,7 +20,7 @@ export function FloatingButtons() {
 
       {/* WhatsApp Button */}
       <a 
-        href="https://wa.me/918660017139" 
+        href={buildWhatsAppUrl(whatsappMessages.floating())} 
         target="_blank" 
         rel="noopener noreferrer"
         className="w-12 h-12 md:w-14 md:h-14 bg-[#FAEBD7] border-2 border-primary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 shadow-xl group relative transform hover:scale-110"

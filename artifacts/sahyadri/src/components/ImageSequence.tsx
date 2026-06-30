@@ -1,17 +1,24 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import heroBg from '@assets/hero-bg.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_FRAMES = 240;
-const FRAME_BASE = '/WhatsApp-Video-2026-06-26-at-401/';
+const FRAME_DIR = 'WhatsApp-Video-2026-06-26-at-401';
+
+function frameSrc(index: number) {
+  const frame = String(index + 1).padStart(4, '0');
+  return `${import.meta.env.BASE_URL}${FRAME_DIR}/${frame}.jpg`;
+}
 
 export function ImageSequence() {
   const containerRef = useRef<HTMLDivElement>(null);
   const pinTargetRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
+  const fallbackRef = useRef<HTMLImageElement | null>(null);
   const currentFrameRef = useRef(0);
   const rafRef = useRef<number>(0);
   const w = useRef(0);
@@ -26,7 +33,6 @@ export function ImageSequence() {
     const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    // ─── 1. Canvas setup ────────────────────────────────────────────────────
     const setupCanvas = () => {
       const isMobile = window.innerWidth < 768;
       const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
@@ -36,54 +42,73 @@ export function ImageSequence() {
       canvas.height = Math.round(h.current * dpr);
       canvas.style.width = `${w.current}px`;
       canvas.style.height = `${h.current}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // reset — never compounds
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
 
-    // ─── 2. Draw a single frame ──────────────────────────────────────────────
-    const drawFrame = (idx: number) => {
-      const frames = framesRef.current;
-      const clamped = Math.min(Math.max(0, idx), TOTAL_FRAMES - 1);
-
-      // Find the nearest loaded frame (scan backward, then forward)
-      let img: HTMLImageElement | null = null;
-      for (let k = clamped; k >= 0; k--) {
-        if (frames[k]?.complete && frames[k].naturalWidth > 0) { img = frames[k]; break; }
-      }
-      if (!img) {
-        for (let k = clamped + 1; k < TOTAL_FRAMES; k++) {
-          if (frames[k]?.complete && frames[k].naturalWidth > 0) { img = frames[k]; break; }
-        }
-      }
-      if (!img) return; // nothing loaded yet — keep canvas black
-
+    const drawImageCover = (img: HTMLImageElement) => {
       const cw = w.current;
       const ch = h.current;
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
+      if (!iw || !ih) return;
 
-      // object-fit: cover — fill entire screen, no black bars
       const scale = Math.max(cw / iw, ch / ih);
       const drawW = iw * scale;
       const drawH = ih * scale;
       const dx = (cw - drawW) / 2;
       const dy = (ch - drawH) / 2;
 
-      // Clear and draw
-      ctx.fillStyle = '#0A0A0A';
+      ctx.fillStyle = '#1a1510';
       ctx.fillRect(0, 0, cw, ch);
       ctx.drawImage(img, dx, dy, drawW, drawH);
 
-      // Very subtle vignette — just enough for cinematic depth
       const vg = ctx.createRadialGradient(cw / 2, ch / 2, ch * 0.2, cw / 2, ch / 2, ch * 0.78);
       vg.addColorStop(0, 'rgba(0,0,0,0)');
-      vg.addColorStop(1, 'rgba(0,0,0,0.28)');
+      vg.addColorStop(1, 'rgba(0,0,0,0.22)');
       ctx.fillStyle = vg;
       ctx.fillRect(0, 0, cw, ch);
     };
 
-    // ─── 3. GSAP ScrollTrigger Pinning and Scrubbing ────────────────────────
+    const drawFrame = (idx: number) => {
+      const frames = framesRef.current;
+      const clamped = Math.min(Math.max(0, idx), TOTAL_FRAMES - 1);
+
+      let img: HTMLImageElement | null = null;
+      for (let k = clamped; k >= 0; k--) {
+        if (frames[k]?.complete && frames[k].naturalWidth > 0) {
+          img = frames[k];
+          break;
+        }
+      }
+      if (!img) {
+        for (let k = clamped + 1; k < TOTAL_FRAMES; k++) {
+          if (frames[k]?.complete && frames[k].naturalWidth > 0) {
+            img = frames[k];
+            break;
+          }
+        }
+      }
+
+      if (img) {
+        drawImageCover(img);
+        return;
+      }
+
+      if (fallbackRef.current?.complete && fallbackRef.current.naturalWidth > 0) {
+        drawImageCover(fallbackRef.current);
+      }
+    };
+
+    const fallback = new Image();
+    fallback.src = heroBg;
+    fallback.onload = () => {
+      fallbackRef.current = fallback;
+      drawFrame(currentFrameRef.current);
+    };
+    fallbackRef.current = fallback;
+
     const trigger = ScrollTrigger.create({
       trigger: container,
       start: 'top top',
@@ -91,14 +116,13 @@ export function ImageSequence() {
       pin: pinTarget,
       pinSpacing: true,
       scrub: true,
+      invalidateOnRefresh: true,
       onUpdate: (self) => {
         currentFrameRef.current = Math.round(self.progress * (TOTAL_FRAMES - 1));
       },
     });
 
-    // ─── 4. Render loop with loading update detection ───────────────────────
     let lastDrawnFrame = -1;
-    let lastDrawnComplete = false;
     let isVisible = true;
 
     const loop = () => {
@@ -108,15 +132,9 @@ export function ImageSequence() {
       }
 
       const f = currentFrameRef.current;
-      const frames = framesRef.current;
-      const currentImg = frames[f];
-      const isComplete = currentImg?.complete && currentImg.naturalWidth > 0;
-
-      // Redraw if index changed OR if it's now complete (was drawn as fallback earlier)
-      if (f !== lastDrawnFrame || (isComplete && !lastDrawnComplete)) {
+      if (f !== lastDrawnFrame) {
         drawFrame(f);
         lastDrawnFrame = f;
-        lastDrawnComplete = isComplete;
       }
       rafRef.current = requestAnimationFrame(loop);
     };
@@ -125,20 +143,29 @@ export function ImageSequence() {
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
+        if (isVisible) drawFrame(currentFrameRef.current);
       },
-      { rootMargin: '100px 0px', threshold: 0 },
+      { rootMargin: '120px 0px', threshold: 0 },
     );
     visibilityObserver.observe(container);
 
-    // ─── 5. Preload — high priority on first 40 frames ─────────────────────
     const imgs: HTMLImageElement[] = [];
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const requestRedraw = () => drawFrame(currentFrameRef.current);
+
+    for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image();
-      img.src = `${FRAME_BASE}${String(i).padStart(4, '0')}.jpg`;
-      if (i <= 40) (img as any).fetchPriority = 'high';
+      img.decoding = 'async';
+      if (i < 30) img.loading = 'eager';
+      img.onload = requestRedraw;
+      img.onerror = () => {
+        if (i === 0) console.warn(`Image sequence frame failed to load: ${frameSrc(i)}`);
+      };
+      img.src = frameSrc(i);
       imgs.push(img);
     }
     framesRef.current = imgs;
+
+    drawFrame(0);
 
     return () => {
       trigger.kill();
@@ -151,11 +178,10 @@ export function ImageSequence() {
   return (
     <div
       ref={containerRef}
-      style={{ position: 'relative', width: '100%', height: '350vh', background: '#0A0A0A' }}
+      style={{ position: 'relative', width: '100%', height: '350vh', background: '#1a1510' }}
       id="image-sequence-section"
       aria-label="Sahyadri project scroll experience"
     >
-      {/* Target pinned by GSAP ScrollTrigger */}
       <div
         ref={pinTargetRef}
         style={{
@@ -165,19 +191,17 @@ export function ImageSequence() {
           position: 'relative',
         }}
       >
-        {/* Full-screen canvas — renders image sequence at 60fps */}
         <canvas
           ref={canvasRef}
           style={{ display: 'block', position: 'absolute', top: 0, left: 0 }}
         />
 
-        {/* Minimal top/bottom edge blend only — does NOT darken the center */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, transparent 8%, transparent 92%, rgba(10,10,10,0.5) 100%)',
+              'linear-gradient(to bottom, rgba(26,21,16,0.45) 0%, transparent 10%, transparent 90%, rgba(26,21,16,0.45) 100%)',
             pointerEvents: 'none',
             zIndex: 2,
           }}

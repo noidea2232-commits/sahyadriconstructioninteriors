@@ -10,6 +10,7 @@ import p3 from '@assets/project-3.png';
 import p4 from '@assets/project-4.png';
 import p5 from '@assets/project-5.png';
 import p6 from '@assets/project-6.png';
+import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -252,7 +253,14 @@ export function FeaturedProjects() {
                 {/* Sticky CTA — always visible on phone */}
                 <div className="shrink-0 p-5 sm:p-8 md:p-10 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] border-t border-border/60 bg-card-antique">
                   <a
-                    href="https://wa.me/918660017139"
+                    href={buildWhatsAppUrl(
+                      whatsappMessages.project(
+                        activeImage.title,
+                        activeImage.category,
+                        activeImage.location,
+                        activeImage.budget,
+                      ),
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-4 sm:py-3.5 bg-primary text-white font-bold text-xs tracking-widest uppercase rounded-xl flex items-center justify-center gap-2 hover:bg-foreground transition-colors shadow-lg"

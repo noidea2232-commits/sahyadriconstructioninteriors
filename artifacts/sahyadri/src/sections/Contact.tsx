@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Star, Instagram, Clock, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { buildWhatsAppUrl, whatsappMessages, WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,8 +29,6 @@ const SERVICE_OPTIONS = [
   { value: "turnkey", label: "Turnkey Solutions" },
   { value: "vastu", label: "Vastu Consultant" },
 ];
-
-const WHATSAPP_NUMBER = "918660017139";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -59,21 +58,16 @@ export function Contact() {
     const serviceLabel =
       SERVICE_OPTIONS.find((opt) => opt.value === values.service)?.label ?? values.service;
 
-    const message = [
-      "Hello Sahyadri Construction & Interiors,",
-      "",
-      "I would like to inquire about a project:",
-      "",
-      `*Name:* ${values.name}`,
-      `*Phone:* ${values.phone}`,
-      `*Email:* ${values.email}`,
-      `*Service:* ${serviceLabel}`,
-      "",
-      `*Project Details:*`,
-      values.message,
-    ].join("\n");
-
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = buildWhatsAppUrl(
+      whatsappMessages.contactInquiry({
+        name: values.name,
+        phone: values.phone,
+        email: values.email,
+        serviceLabel,
+        message: values.message,
+      }),
+      WHATSAPP_NUMBER,
+    );
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     toast({
