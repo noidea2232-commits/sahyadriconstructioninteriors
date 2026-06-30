@@ -1,4 +1,4 @@
-import logo from '@assets/WhatsApp_Image_2026-06-20_at_9.58.59_PM_(1)_1782412603975.jpeg';
+import logo from '@assets/sahyadri-logo-new.png';
 import { Instagram, Facebook, Youtube } from 'lucide-react';
 
 export function Footer() {
@@ -12,7 +12,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col items-center mb-20">
           <div className="w-24 h-24 rounded-full overflow-hidden border border-primary/30 mb-8">
-            <img src={logo} alt="Sahyadri Logo" className="w-full h-full object-cover" />
+            <img src={logo} alt="Sahyadri Logo" className="w-full h-full object-contain bg-black" />
           </div>
           <h2 className="text-3xl font-display font-bold text-white tracking-widest mb-3 text-center uppercase">Sahyadri</h2>
           <p className="text-primary text-xs tracking-[0.4em] uppercase font-bold">Construction & Interiors</p>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import logo from '@assets/WhatsApp_Image_2026-06-20_at_9.58.59_PM_(1)_1782412603975.jpeg';
+import logo from '@assets/sahyadri-logo-new.png';
 
 const links = [
   { name: 'Home', href: '#home' },
@@ -67,7 +67,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#home" onClick={(e) => scrollTo(e, '#home')} className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 group-hover:border-primary transition-colors duration-300">
-              <img src={logo} alt="Sahyadri Logo" className="w-full h-full object-cover" />
+              <img src={logo} alt="Sahyadri Logo" className="w-full h-full object-contain bg-black" />
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-lg md:text-xl tracking-wide text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">SAHYADRI</span>
