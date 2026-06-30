@@ -36,7 +36,7 @@ export function ImageSequence() {
     const setupCanvas = () => {
       const isMobile = window.innerWidth < 768;
       const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
-      w.current = window.innerWidth;
+      w.current = Math.min(window.innerWidth, document.documentElement.clientWidth);
       h.current = window.innerHeight;
       canvas.width = Math.round(w.current * dpr);
       canvas.height = Math.round(h.current * dpr);
@@ -47,14 +47,15 @@ export function ImageSequence() {
     setupCanvas();
     window.addEventListener('resize', setupCanvas);
 
-    const drawImageCover = (img: HTMLImageElement) => {
+    const drawImageFit = (img: HTMLImageElement) => {
       const cw = w.current;
       const ch = h.current;
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
       if (!iw || !ih) return;
 
-      const scale = Math.max(cw / iw, ch / ih);
+      // Contain — show the full frame on every device (no edge cropping)
+      const scale = Math.min(cw / iw, ch / ih);
       const drawW = iw * scale;
       const drawH = ih * scale;
       const dx = (cw - drawW) / 2;
@@ -64,9 +65,9 @@ export function ImageSequence() {
       ctx.fillRect(0, 0, cw, ch);
       ctx.drawImage(img, dx, dy, drawW, drawH);
 
-      const vg = ctx.createRadialGradient(cw / 2, ch / 2, ch * 0.2, cw / 2, ch / 2, ch * 0.78);
+      const vg = ctx.createRadialGradient(cw / 2, ch / 2, ch * 0.15, cw / 2, ch / 2, ch * 0.85);
       vg.addColorStop(0, 'rgba(0,0,0,0)');
-      vg.addColorStop(1, 'rgba(0,0,0,0.22)');
+      vg.addColorStop(1, 'rgba(0,0,0,0.18)');
       ctx.fillStyle = vg;
       ctx.fillRect(0, 0, cw, ch);
     };
@@ -92,12 +93,12 @@ export function ImageSequence() {
       }
 
       if (img) {
-        drawImageCover(img);
+        drawImageFit(img);
         return;
       }
 
       if (fallbackRef.current?.complete && fallbackRef.current.naturalWidth > 0) {
-        drawImageCover(fallbackRef.current);
+        drawImageFit(fallbackRef.current);
       }
     };
 
@@ -186,14 +187,15 @@ export function ImageSequence() {
         ref={pinTargetRef}
         style={{
           width: '100%',
-          height: '100vh',
+          maxWidth: '100vw',
+          height: '100dvh',
           overflow: 'hidden',
           position: 'relative',
         }}
       >
         <canvas
           ref={canvasRef}
-          style={{ display: 'block', position: 'absolute', top: 0, left: 0 }}
+          style={{ display: 'block', position: 'absolute', top: 0, left: 0, maxWidth: '100%' }}
         />
 
         <div

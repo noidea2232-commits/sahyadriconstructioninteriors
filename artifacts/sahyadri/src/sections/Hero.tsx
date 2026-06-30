@@ -191,21 +191,26 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Image Parallax
-      gsap.to(".hero-img-inner", {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 768px)', () => {
+      const ctx = gsap.context(() => {
+        gsap.to('.hero-img-inner', {
+          yPercent: 20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
       });
+
+      return () => ctx.revert();
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const scrollTo = (href: string) => {
@@ -219,27 +224,27 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative h-[100dvh] w-full bg-background flex flex-col md:flex-row overflow-hidden pt-20 md:pt-0" ref={heroRef}>
+    <section id="home" className="relative w-full max-w-[100vw] bg-background flex flex-col md:flex-row md:min-h-[100dvh] overflow-x-hidden pt-20 md:pt-0" ref={heroRef}>
       
-      {/* Left Column - Text */}
-      <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-16 lg:px-24 z-10">
-        <div className="hero-eyebrow flex items-center gap-4 mb-6 opacity-0">
+      {/* Text */}
+      <div className="w-full md:w-1/2 md:min-h-[100dvh] flex flex-col justify-center px-5 sm:px-6 md:px-16 lg:px-24 z-10 py-6 sm:py-8 md:py-0 shrink-0 order-1">
+        <div className="hero-eyebrow flex items-center gap-4 mb-4 sm:mb-6 opacity-0">
           <div className="w-8 h-[2px] bg-primary"></div>
           <span className="text-primary font-bold tracking-[0.2em] uppercase text-xs">Shivamogga's Finest</span>
         </div>
 
         <h1 
           ref={textRef} 
-          className="text-5xl md:text-[5.5vw] leading-[0.95] font-display font-extrabold text-foreground uppercase tracking-tighter mb-8"
+          className="text-[2.25rem] sm:text-5xl md:text-[5.5vw] leading-[1] font-display font-extrabold text-foreground uppercase tracking-tighter mb-5 sm:mb-8 max-w-full break-words"
         >
           Build Your Dream Space
         </h1>
         
-        <p className="hero-desc-text text-lg text-muted-foreground font-light max-w-lg mb-12 leading-relaxed opacity-0">
+        <p className="hero-desc-text text-base sm:text-lg text-muted-foreground font-light max-w-lg mb-8 sm:mb-12 leading-relaxed opacity-0">
           Shivamogga's premier high-end construction and interior design firm. We create luxury residential and commercial spaces with uncompromising precision.
         </p>
         
-        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-6 mb-16">
+        <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-16">
           <button 
             onClick={() => scrollTo('#projects')}
             className="px-8 py-4 bg-primary text-primary-foreground font-bold tracking-widest uppercase hover:bg-foreground transition-colors duration-300 flex items-center justify-center gap-2 group cursor-pointer"
@@ -272,19 +277,19 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Right Column - Image */}
-      <div className="absolute md:relative inset-0 md:inset-auto w-full md:w-1/2 h-full z-0 opacity-20 md:opacity-100 overflow-hidden border-l border-primary/20">
-        <div className="absolute inset-0 w-full h-[120%] -top-[10%] hero-img-inner">
+      {/* Image — stacked below text on mobile, side panel on desktop */}
+      <div className="relative w-full md:w-1/2 h-[34vh] sm:h-[38vh] md:h-auto md:min-h-[100dvh] shrink-0 order-2 overflow-hidden border-t md:border-t-0 md:border-l border-primary/20 bg-[#0f0d0b]">
+        <div className="absolute inset-0 w-full h-full hero-img-inner">
           <div 
-            className="hero-img-inner-bg absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="hero-img-inner-bg absolute inset-0 bg-contain md:bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
         </div>
-        <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+        <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none w-full h-full" />
       </div>
 
       {/* Scroll indicator */}
-      <div className="hero-scroll absolute bottom-8 left-6 md:left-24 flex items-center gap-4 opacity-0 z-20">
+      <div className="hero-scroll absolute bottom-6 sm:bottom-8 left-5 sm:left-6 md:left-24 flex items-center gap-4 opacity-0 z-20 hidden sm:flex">
         <span className="text-[10px] uppercase tracking-[0.3em] text-foreground font-bold rotate-180" style={{ writingMode: 'vertical-rl' }}>Scroll</span>
         <div className="w-[1px] h-16 bg-border relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1/2 bg-primary animate-scroll-down" />
