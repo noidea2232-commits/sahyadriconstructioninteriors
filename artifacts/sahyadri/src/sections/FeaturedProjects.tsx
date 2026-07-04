@@ -8,7 +8,7 @@ import p1 from '@assets/project-1.png';
 import p2 from '@assets/project-2.png';
 import p3 from '@assets/project-3.png';
 import p4 from '@assets/project-4.png';
-import p5 from '@assets/project-5.png';
+import p5 from '@assets/industrial-construction.jpeg';
 import p6 from '@assets/project-6.png';
 import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
 import { ProjectStoryVideo } from '@/components/ProjectStoryVideo';

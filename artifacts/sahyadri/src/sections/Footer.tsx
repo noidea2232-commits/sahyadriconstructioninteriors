@@ -43,7 +43,6 @@ export function Footer() {
           <div>
             <h4 className="text-white font-display font-bold mb-8 tracking-widest uppercase text-sm">Connect</h4>
             <ul className="space-y-4">
-              <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">+91 86608 00057</li>
               <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">+91 86600 17139</li>
               <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">sahyadriconstructioninterior.in@gmail.com</li>
               <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">Shivamogga, Karnataka</li>
@@ -52,10 +51,11 @@ export function Footer() {
               <a href="https://www.instagram.com/sahyadri_construction_interior/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
                 <Instagram size={20} />
               </a>
-              <a href="https://wa.me/918660800057" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
+              <a href="https://wa.me/918660017139" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
                 <MessageCircle size={20} />
               </a>
               <a href="mailto:sahyadriconstructioninterior.in@gmail.com" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
+
                 <Mail size={20} />
               </a>
             </div>
