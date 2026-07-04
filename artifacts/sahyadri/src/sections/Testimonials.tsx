@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const reviews = [
   {
-    name: "Rahul Deshpande",
+    name: "Mr. C.Vijay kumar",
     role: "Villa Owner",
     location: "Shivamogga",
     text: "Sahyadri Construction transformed our vision into reality. The attention to detail in the structural framework, teak woodwork, and Italian marble finishing is simply world-class. Every room reflects pure craftsmanship.",
@@ -17,7 +17,7 @@ const reviews = [
     rating: 5,
   },
   {
-    name: "Priya Sharma",
+    name: "Mr.Raghunandan.P",
     role: "Corporate Director",
     location: "Shivamogga",
     text: "Delivered our flagship commercial business space exactly on schedule with zero compromises on structural integrity. Highly professional leadership, transparent billing, and extraordinary execution.",
@@ -26,7 +26,7 @@ const reviews = [
     rating: 5,
   },
   {
-    name: "Anand Gowda",
+    name: "Mr.Chandrashekar, shantala industry",
     role: "Industrial Developer",
     location: "Thirthahalli Road, Shivamogga",
     text: "From ground excavation to heavy-duty structural steel deployment, Sanjeeth & Arun's engineering team executed our industrial project with perfection. Reliable and built to last.",
@@ -35,7 +35,7 @@ const reviews = [
     rating: 5,
   },
   {
-    name: "Sneha Patil",
+    name: "Mrs.Akshatha gowda.R",
     role: "Homeowner",
     location: "Shivamogga",
     text: "We wanted a breathtaking luxury feel for our interior renovation. Sahyadri delivered beyond our expectations — custom cabinetry, ambient lighting, and bespoke spatial planning brought our home to life.",
@@ -44,7 +44,7 @@ const reviews = [
     rating: 5,
   },
   {
-    name: "Karthik Reddy",
+    name: "Mr.Umashankar .P.S",
     role: "Turnkey Client",
     location: "Shivamogga",
     text: "Trust is rare in construction, but Sahyadri proved to be completely dependable. Their turnkey service was seamless. I didn't have to worry about a single material or site hassle — truly priceless peace of mind.",

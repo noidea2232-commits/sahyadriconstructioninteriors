@@ -48,75 +48,75 @@ export function Loader({ onComplete }: LoaderProps) {
       scale: 1,
       y: 0,
       filter: 'blur(0px)',
-      duration: 0.95,
+      duration: 0.6,
       ease: 'power3.out',
     }, 0);
 
     tl.to(sheen, {
       x: '150%',
-      duration: 0.65,
+      duration: 0.4,
       ease: 'power2.inOut',
-    }, 0.55);
+    }, 0.35);
 
     tl.to(brandName, {
       opacity: 1,
       y: 0,
       letterSpacing: '0.18em',
-      duration: 0.75,
+      duration: 0.5,
       ease: 'power3.out',
-    }, 0.9);
+    }, 0.5);
 
     tl.to(tagline, {
       opacity: 1,
       y: 0,
-      duration: 0.45,
+      duration: 0.3,
       ease: 'power2.out',
-    }, 1.15);
+    }, 0.7);
 
     tl.to(line, {
       scaleX: 1,
-      duration: 0.45,
+      duration: 0.3,
       ease: 'power2.inOut',
-    }, 1.25);
+    }, 0.75);
 
     tl.to(group, {
       y: -48,
       opacity: 0,
       filter: 'blur(4px)',
-      duration: 0.45,
+      duration: 0.35,
       ease: 'power2.inOut',
-    }, 2.65);
+    }, 1.5);
 
     tl.to(brandName, {
       opacity: 0,
       y: -22,
-      duration: 0.35,
+      duration: 0.25,
       ease: 'power2.in',
-    }, 2.65);
+    }, 1.5);
 
     tl.to(tagline, {
       opacity: 0,
       y: -12,
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.in',
-    }, 2.72);
+    }, 1.55);
 
     tl.to(line, {
       scaleX: 0,
       opacity: 0,
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.in',
-    }, 2.75);
+    }, 1.57);
 
     tl.to(overlay, {
       opacity: 0,
-      duration: 0.45,
+      duration: 0.3,
       ease: 'power2.out',
-    }, 2.82);
+    }, 1.6);
 
     tl.add(() => {
       document.dispatchEvent(new CustomEvent('start-hero-animation'));
-    }, 2.9);
+    }, 1.65);
 
     return () => {
       tl.kill();

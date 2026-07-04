@@ -1,5 +1,5 @@
 import logo from '@assets/sahyadri-logo-new.png';
-import { Instagram, Facebook, Youtube } from 'lucide-react';
+import { Instagram, Mail, MessageCircle } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -43,18 +43,20 @@ export function Footer() {
           <div>
             <h4 className="text-white font-display font-bold mb-8 tracking-widest uppercase text-sm">Connect</h4>
             <ul className="space-y-4">
-              <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">+91 8660017139</li>
+              <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">+91 86608 00057</li>
+              <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">+91 86600 17139</li>
+              <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">sahyadriconstructioninterior.in@gmail.com</li>
               <li className="text-[#8A837A] uppercase tracking-widest text-xs font-bold">Shivamogga, Karnataka</li>
             </ul>
             <div className="flex justify-center md:justify-start gap-4 mt-8">
-              <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
+              <a href="https://www.instagram.com/sahyadri_construction_interior/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
-                <Facebook size={20} />
+              <a href="https://wa.me/918660800057" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
+                <MessageCircle size={20} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
-                <Youtube size={20} />
+              <a href="mailto:sahyadriconstructioninterior.in@gmail.com" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:bg-primary hover:text-black transition-all">
+                <Mail size={20} />
               </a>
             </div>
           </div>
