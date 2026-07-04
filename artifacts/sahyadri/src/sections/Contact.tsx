@@ -332,7 +332,10 @@ export function Contact() {
                 </div>
 
                 <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 text-primary">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 text-white shadow-md"
+                    style={{ background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}
+                  >
                     <Instagram size={20} />
                   </div>
                   <div>

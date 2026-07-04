@@ -13,17 +13,8 @@ const links = [
 ];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem('loader-played')) {
@@ -58,11 +49,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={shouldAnimate ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 md:px-12 ${
-          isScrolled 
-            ? 'py-4 bg-background/95 backdrop-blur-xl border-b border-primary/20 shadow-[0_4px_30px_rgba(184,146,74,0.05)]' 
-            : 'py-6 md:py-8 bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 bg-background/95 backdrop-blur-xl border-b border-primary/20 shadow-[0_4px_30px_rgba(184,146,74,0.05)]"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#home" onClick={(e) => scrollTo(e, '#home')} className="flex items-center gap-3 group">

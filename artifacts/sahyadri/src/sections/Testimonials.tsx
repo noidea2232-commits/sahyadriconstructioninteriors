@@ -19,7 +19,7 @@ const reviews = [
   {
     name: "Priya Sharma",
     role: "Corporate Director",
-    location: "Shimoga",
+    location: "Shivamogga",
     text: "Delivered our flagship commercial business space exactly on schedule with zero compromises on structural integrity. Highly professional leadership, transparent billing, and extraordinary execution.",
     project: "Commercial Hub",
     budget: "₹1.0 Cr",
@@ -28,7 +28,7 @@ const reviews = [
   {
     name: "Anand Gowda",
     role: "Industrial Developer",
-    location: "Thirthahalli Road, Shimoga",
+    location: "Thirthahalli Road, Shivamogga",
     text: "From ground excavation to heavy-duty structural steel deployment, Sanjeeth & Arun's engineering team executed our industrial project with perfection. Reliable and built to last.",
     project: "Heavy-Duty Structure",
     budget: "₹80 Lakh",

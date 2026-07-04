@@ -9,7 +9,8 @@ export function FloatingButtons() {
         href="https://www.instagram.com/sahyadri_construction_interior/" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="w-12 h-12 md:w-14 md:h-14 bg-[#FAEBD7] border-2 border-primary text-primary rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 shadow-xl group relative transform hover:scale-110"
+        className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-xl group relative transform hover:scale-110 border-2 border-white"
+        style={{ background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}
         aria-label="Instagram"
       >
         <Instagram size={24} className="group-hover:rotate-6 transition-transform" />

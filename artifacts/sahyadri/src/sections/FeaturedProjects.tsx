@@ -11,8 +11,12 @@ import p4 from '@assets/project-4.png';
 import p5 from '@assets/project-5.png';
 import p6 from '@assets/project-6.png';
 import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
+import { ProjectStoryVideo } from '@/components/ProjectStoryVideo';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const RESIDENTIAL_VIDEO = '/videos/residential-construction.mp4';
+const COMMERCIAL_VIDEO = '/videos/commercial-construction.mp4';
 
 const projects = [
   { 
@@ -20,17 +24,17 @@ const projects = [
     title: "Sahyadri Construction And Interiors: Premium Residential Construction Built to Last", 
     shortTitle: "Premium Residential Construction",
     category: "Residential Construction", 
-    location: "Shimoga",
+    location: "Shivamogga",
     budget: "₹1.5 Cr Budget",
     image: p1,
     desc: "Bespoke architectural villa built for generational durability with luxury marble finishes, custom acoustics, and automated climate systems."
   },
   { 
     id: 2, 
-    title: "Sahyadri Construction And Interiors: Commercial Project Built at Shimoga", 
-    shortTitle: "Commercial Hub Shimoga",
+    title: "Sahyadri Construction And Interiors: Commercial Project Built at Shivamogga", 
+    shortTitle: "Commercial Hub Shivamogga",
     category: "Commercial Project", 
-    location: "Shimoga",
+    location: "Shivamogga",
     budget: "₹1.0 Cr Budget",
     image: p2,
     desc: "State-of-the-art commercial business center engineered with high-durability curtain walls, modern elevators, and efficient workspace layouts."
@@ -40,7 +44,7 @@ const projects = [
     title: "Sahyadri Construction And Interiors: Industrial Structures Built for Heavy-Duty Performance", 
     shortTitle: "Heavy-Duty Industrial Structure",
     category: "Industrial Construction", 
-    location: "Shimoga, Thirthahalli Road",
+    location: "Shivamogga, Thirthahalli Road",
     budget: "₹80 Lakh Budget",
     image: p5,
     desc: "Heavy-duty reinforced industrial warehouse and manufacturing plant built for structural strength, high-load capacities, and safety clearance."
@@ -50,7 +54,7 @@ const projects = [
     title: "Sahyadri Construction And Interiors: Luxury Interior Project", 
     shortTitle: "Luxury Residence Interiors",
     category: "Interior Design", 
-    location: "Shimoga",
+    location: "Shivamogga",
     budget: "₹30 Lakh Budget",
     image: p3,
     desc: "Curated opulent interior environments featuring Italian marble highlights, custom joinery, teak woodwork, and ambient smart lighting."
@@ -60,7 +64,7 @@ const projects = [
     title: "Sahyadri Construction And Interiors: Culinary & Living Architecture", 
     shortTitle: "Bespoke Kitchen & Living Space",
     category: "Turnkey Interiors", 
-    location: "Shimoga",
+    location: "Shivamogga",
     budget: "₹45 Lakh Budget",
     image: p4,
     desc: "Contemporary culinary haven and living room space designed with seamless ergonomics, quartz countertops, and concealed storage."
@@ -70,7 +74,7 @@ const projects = [
     title: "Sahyadri Construction And Interiors: Executive Corporate Boardroom", 
     shortTitle: "Executive Suite Renovation",
     category: "Commercial Interior", 
-    location: "Shimoga",
+    location: "Shivamogga",
     budget: "₹25 Lakh Budget",
     image: p6,
     desc: "Executive boardroom and corporate suite featuring acoustic panelling, teak conference desks, and integrated audiovisual infrastructure."
@@ -84,7 +88,7 @@ export function FeaturedProjects() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const items = galleryRef.current?.querySelectorAll('.project-item');
+      const items = galleryRef.current?.querySelectorAll('.project-item, .project-story-block');
       
       if (items) {
         gsap.fromTo(items,
@@ -130,7 +134,29 @@ export function FeaturedProjects() {
           </a>
         </div>
 
-        <div ref={galleryRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div ref={galleryRef} className="flex flex-col gap-16 md:gap-20">
+          {/* Residential storytelling video — first */}
+          <div className="project-story-block flex flex-col gap-8 md:gap-10">
+            <div className="text-center md:text-left max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase mb-5">
+                On-Site Story
+              </div>
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-extrabold text-foreground leading-tight mb-4">
+                Residential Construction <span className="font-serif italic font-normal text-primary">in Motion</span>
+              </h3>
+              <p className="text-muted-foreground text-sm md:text-base font-light leading-relaxed">
+                Watch our recent residential build come to life — from structural precision to refined finishing. Scroll into view to play automatically; tap the speaker to hear the full story.
+              </p>
+            </div>
+            <ProjectStoryVideo
+              src={RESIDENTIAL_VIDEO}
+              category="Residential Construction"
+              subtitle="Recent Project Film"
+              title="Luxury Home Built with Sahyadri Precision"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {projects.map((project, i) => (
             <button
               key={project.id}
@@ -180,6 +206,37 @@ export function FeaturedProjects() {
               </div>
             </button>
           ))}
+          </div>
+
+          {/* Commercial storytelling video — last */}
+          <div className="project-story-block flex flex-col gap-8 md:gap-10 pt-4">
+            <div className="text-center md:text-left max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase mb-5">
+                Built for Business
+              </div>
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-extrabold text-foreground leading-tight mb-4">
+                Commercial Excellence <span className="font-serif italic font-normal text-primary">& Client Satisfaction</span>
+              </h3>
+              <p className="text-muted-foreground text-sm md:text-base font-light leading-relaxed mb-6 md:mb-0">
+                Our commercial projects are engineered for lasting impact — robust structures, professional finishes, and partnerships our clients are proud to stand behind.
+              </p>
+              <a
+                href={buildWhatsAppUrl(whatsappMessages.general())}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold text-xs tracking-widest uppercase rounded-xl hover:bg-foreground transition-colors shadow-lg mt-2"
+              >
+                Discuss Your Commercial Project
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
+            <ProjectStoryVideo
+              src={COMMERCIAL_VIDEO}
+              category="Commercial Construction"
+              subtitle="Client Satisfaction Film"
+              title="Commercial Spaces Delivered with Pride & Trust"
+            />
+          </div>
         </div>
       </div>
 
@@ -246,7 +303,7 @@ export function FeaturedProjects() {
                   </p>
 
                   <p className="text-xs text-muted-foreground mt-6 sm:mt-8">
-                    Interested in a similar construction or interior project in Shimoga?
+                    Interested in a similar construction or interior project in Shivamogga?
                   </p>
                 </div>
 

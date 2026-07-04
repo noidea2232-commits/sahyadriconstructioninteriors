@@ -4,27 +4,29 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
 import { ShieldCheck, Award, Building, UserCheck, Phone, MessageCircle } from 'lucide-react';
 import aboutImg from '@assets/about-img.png';
+import foundersPhoto from '@assets/founders-photo.png';
 import { COMPANY_STATS } from '@/lib/company-stats';
 import { buildWhatsAppUrl, whatsappMessages } from '@/lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const FOUNDER_DESCRIPTION =
+  "Co-founding and jointly leading Sahyadri Construction & Interiors with shared vision and equal commitment — delivering engineering excellence, architectural innovation, and client-focused turnkey solutions across Karnataka's premier developments.";
+
 const founders = [
-  {
-    name: "Arun G",
-    role: "Founder & Managing Director",
-    phone: "86600 17139",
-    phoneClean: "+918660017139",
-    whatsapp: "918660017139",
-    desc: "Spearheading engineering perfection, structural integrity, and sustainable project execution with visionary leadership across Karnataka."
-  },
   {
     name: "Sanjeeth S",
     role: "Founder & Managing Director",
     phone: "86608 00057",
     phoneClean: "+918660800057",
     whatsapp: "918660800057",
-    desc: "Championing architectural innovation, high-end interior design aesthetics, and client-centric turnkey excellence for prestigious properties."
+  },
+  {
+    name: "Arun G",
+    role: "Founder & Managing Director",
+    phone: "86600 17139",
+    phoneClean: "+918660017139",
+    whatsapp: "918660017139",
   }
 ];
 
@@ -255,63 +257,87 @@ export function About() {
               Meet Our Founders & Managing Directors
             </h3>
             <p className="text-muted-foreground mt-3 font-light text-sm md:text-base">
-              Direct leadership guiding Sahyadri Construction & Interiors. Connect directly via Call or Business WhatsApp.
+              Equal partners in vision and leadership. Connect directly with either founder via Call or Business WhatsApp.
             </p>
           </div>
 
-          <div ref={foundersRef} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {founders.map((founder, index) => (
-              <div 
-                key={index}
-                className="bg-card-antique p-8 md:p-10 rounded-2xl border border-card-border shadow-lg hover:shadow-xl hover:border-primary/50 transition-all duration-300 relative group overflow-hidden flex flex-col justify-between"
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none group-hover:bg-primary/10 transition-colors duration-500" />
-                
-                <div>
-                  <div className="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center font-display font-extrabold text-2xl mb-6 shadow-md">
-                    {founder.name.charAt(0)}
+          {/* Founders layout: mobile = photo on top; desktop = cards left, photo right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+            {/* Founder cards — left on desktop, below photo on mobile */}
+            <div ref={foundersRef} className="order-2 lg:order-1 flex flex-col gap-8">
+              {founders.map((founder, index) => (
+                <div 
+                  key={index}
+                  className="bg-card-antique p-8 md:p-10 rounded-2xl border border-card-border shadow-lg hover:shadow-xl hover:border-primary/50 transition-all duration-300 relative group overflow-hidden flex flex-col justify-between"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none group-hover:bg-primary/10 transition-colors duration-500" />
+                  
+                  <div>
+                    <div className="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center font-display font-extrabold text-2xl mb-6 shadow-md">
+                      {founder.name.charAt(0)}
+                    </div>
+                    <h4 className="text-2xl md:text-3xl font-display font-extrabold text-foreground mb-1">
+                      {founder.name}
+                    </h4>
+                    <p className="text-xs uppercase tracking-widest font-extrabold text-primary mb-4">
+                      {founder.role}
+                    </p>
+                    <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6">
+                      {FOUNDER_DESCRIPTION}
+                    </p>
                   </div>
-                  <h4 className="text-2xl md:text-3xl font-display font-extrabold text-foreground mb-1">
-                    {founder.name}
-                  </h4>
-                  <p className="text-xs uppercase tracking-widest font-extrabold text-primary mb-4">
-                    {founder.role}
-                  </p>
-                  <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6">
-                    {founder.desc}
-                  </p>
-                </div>
 
-                {/* Direct Founder Contact CTAs */}
-                <div className="pt-6 border-t border-border/60">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-3">
-                    Business Contact ({founder.phone}):
-                  </span>
-                  <div className="grid grid-cols-2 gap-3">
-                    <a 
-                      href={`tel:${founder.phoneClean}`}
-                      className="px-4 py-2.5 bg-white/80 hover:bg-foreground hover:text-white text-foreground border border-card-border rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all duration-300 shadow-sm"
-                    >
-                      <Phone size={14} className="text-primary group-hover:text-white" />
-                      <span>Call Now</span>
-                    </a>
-                    <a 
-                      href={buildWhatsAppUrl(
-                        whatsappMessages.founder(founder.name, founder.role),
-                        founder.whatsapp,
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all duration-300 shadow-md"
-                    >
-                      <MessageCircle size={15} />
-                      <span>WhatsApp</span>
-                    </a>
+                  <div className="pt-6 border-t border-border/60">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-3">
+                      Business Contact ({founder.phone}):
+                    </span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <a 
+                        href={`tel:${founder.phoneClean}`}
+                        className="px-4 py-2.5 bg-white/80 hover:bg-foreground hover:text-white text-foreground border border-card-border rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all duration-300 shadow-sm"
+                      >
+                        <Phone size={14} className="text-primary group-hover:text-white" />
+                        <span>Call Now</span>
+                      </a>
+                      <a 
+                        href={buildWhatsAppUrl(
+                          whatsappMessages.founder(founder.name, founder.role),
+                          founder.whatsapp,
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all duration-300 shadow-md"
+                      >
+                        <MessageCircle size={15} />
+                        <span>WhatsApp</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
 
+            {/* Founders photo — right on desktop, first on mobile */}
+            <div className="order-1 lg:order-2 lg:sticky lg:top-28">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/60">
+                <img
+                  src={foundersPhoto}
+                  alt="Sanjeeth S and Arun G — Founders & Managing Directors of Sahyadri Construction & Interiors"
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
-            ))}
+              <div className="grid grid-cols-2 gap-4 mt-4 text-center">
+                <div>
+                  <p className="text-lg md:text-xl font-display font-extrabold text-foreground">Sanjeeth S</p>
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-primary mt-1">Founder & Managing Director</p>
+                </div>
+                <div>
+                  <p className="text-lg md:text-xl font-display font-extrabold text-foreground">Arun G</p>
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-primary mt-1">Founder & Managing Director</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
